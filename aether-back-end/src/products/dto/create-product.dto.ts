@@ -1,6 +1,12 @@
 
 
 export class CreateProductDto {
-    readonly name: string;
+    name: string;
+    price: number;
+    smallQuantity: number;
+    medQuantity: number;
+    lrgQuantity: number;
+    imgUrl: string;
+    type: string;
 
   }
