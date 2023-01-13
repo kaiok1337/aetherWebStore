@@ -1,0 +1,17 @@
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.product-card{
+    border: 2px solid red;
+    color: white;
+    max-width: fit-content;
+    margin-bottom: 5em;
+}
+
+.product-card img{
+    max-width: 400px;
+}

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react';
+import './product.css'
 
 function Product() {
     const [info, setInfo] = useState([])
@@ -13,16 +14,14 @@ function Product() {
         getProductInfo()
       }, [])
     return(
-        <section>
-            <h1>Products:</h1>
-            <div>
-                { info.map((product, i) =>
-                <div>
-                    <h2>{product.name}</h2>
-                    <img src={product.imgUrl}/>
-                </div>
-                )}
+        <section className="card-container">
+            { info.map((product, i) =>
+            <div className="product-card">
+                <h2>{product.name}</h2>
+                <p>${product.price}</p>
+                <img src={product.imgUrl}/>
             </div>
+            )}
         </section>
     )
 }
