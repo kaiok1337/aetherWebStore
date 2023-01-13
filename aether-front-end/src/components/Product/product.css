@@ -1,17 +1,24 @@
 
 .card-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: auto;
 }
 
-.product-card{
-    border: 2px solid red;
+.product-card {
+    border: 2px solid white;
+    border-radius: 20px;
     color: white;
-    max-width: fit-content;
+    margin: auto;
     margin-bottom: 5em;
+    width: 40%;
+}
+
+button {
+    color: red;
 }
 
 .product-card img{
-    max-width: 400px;
+    max-width: 20em;
 }

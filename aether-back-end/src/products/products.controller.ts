@@ -17,4 +17,9 @@ export class ProductsController {
     return this.productsService.findAll();
   }
 
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return this.productsService.delete(id);
+  }
+
 }
