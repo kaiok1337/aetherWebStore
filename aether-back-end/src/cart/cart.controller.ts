@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Request, UseGuards, Delete, NotFoundException, Param } from '@nestjs/common';
+import { Controller, Post, Body, Request, UseGuards, Delete, NotFoundException, Param, Get } from '@nestjs/common';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
@@ -34,6 +34,15 @@ export class CartController {
   @Delete('/:id')
   async deleteCart(@Param('id') userId: string) {
     const cart = await this.cartService.deleteCart(userId);
+    if (!cart) throw new NotFoundException('Cart does not exist');
+    return cart;
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.User)
+  @Get('/:id')
+  async viewCart(@Param('id') userId: string) {
+    const cart = await this.cartService.getCart(userId);
     if (!cart) throw new NotFoundException('Cart does not exist');
     return cart;
   }
