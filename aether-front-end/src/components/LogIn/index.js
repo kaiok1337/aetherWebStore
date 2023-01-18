@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import axios from 'axios'
-import { useEffect} from 'react';
+import { useState, useEffect} from 'react';
+import './login.css'
+import Modal from 'react-modal';
 
 
 export default function LogIn ({setIsLoggedIn , isLoggedIn}) {
@@ -9,6 +10,7 @@ export default function LogIn ({setIsLoggedIn , isLoggedIn}) {
         username: '',
         password: '',
     })
+    const [modalIsOpen, setIsOpen] = useState(false)
 
     // update the input value as a user types
     const handleChange = (event) => {
@@ -19,13 +21,33 @@ export default function LogIn ({setIsLoggedIn , isLoggedIn}) {
         event.preventDefault()
         const { data } = await axios.post('http://localhost:8000/auth/login', formState)
         localStorage.token = data.token
+        setIsLoggedIn(true)
     }
+
+    function openModal() {
+        setIsOpen(true);
+      }
+    
+      function afterOpenModal() {
+        
+      }
+    
+      function closeModal() {
+        setIsOpen(false);
+      }
+    
 
     // redirect to home page if not logged in
     return (
         <div className="container">
-            <h2>Login</h2>
-
+            <h2 onClick={openModal}>Login</h2>
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                contentLabel="Login Component"
+            >
+            <button onClick={closeModal}>x</button>
             <form onSubmit={submitHandler}>
                 <div className="input-text">
                     <label htmlFor='username'>Username</label>
@@ -47,6 +69,8 @@ export default function LogIn ({setIsLoggedIn , isLoggedIn}) {
 
                 <button type='submit'className="button" >Login</button>
             </form>
+            </Modal>
+            
         </div>
     )
 }

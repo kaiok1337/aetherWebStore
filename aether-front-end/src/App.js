@@ -1,45 +1,47 @@
 import axios from 'axios'
+import { Routes, Route, Link } from "react-router-dom";
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import Product from './components/Product'
-import Nav from './components/Nav'
-import Spotify from 'react-spotify-embed'
-import LogIn from './components/LogIn';
+import Home from './pages/Home'
+import Nav from './components/Nav';
+import SignUp from './pages/SignUp';
+import Cart from './pages/Cart'
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState({})
+  const [cartItems, setCartItems] = useState([])
 
   async function getUser(){
+    let bearerToken = localStorage.getItem('token')
     const config = {
       headers:{
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${bearerToken}`
       }
     };
-    const userData = await axios.post("http://localhost:8000/auth/login", config)
+    const userData = await axios.get("http://localhost:8000/auth/user", config)
     setUser(userData.data)
   }
-
 
   useEffect(() => {
     if (localStorage.token) {
         getUser()
-        console.log('getUser has been run')
+        setIsLoggedIn(true)
+        console.log(user)
     }
-  }, [])
+  }, [localStorage.token])
 
   return (
-    <div className="App">
-      <div>
-        { isLoggedIn ?
-        <h1>{user.username} = Logged In!</h1>
-      : <h1>not logged</h1>}
-      </div>
-      <Nav/>
-      <LogIn isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-      <Product/>
-      <Spotify width="50%" height="500px" link="https://open.spotify.com/artist/7Jtn7Qm47bezv1myVrZIZo?si=DOnmq_uIQ2CrgXuahmPncg" />
-    </div>
+    <main>
+      <h1>{user.username}</h1>
+      <Nav cartItems={cartItems} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <Routes>
+        <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} user={user}/>}></Route>
+        <Route path="/signup" element={<SignUp setIsLoggedIn={setIsLoggedIn}/>}></Route>
+        <Route path="/" element={<Home user={user} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>}></Route>
+      </Routes>
+    </main>
   );
 }
 
