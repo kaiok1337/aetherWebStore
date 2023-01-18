@@ -1,9 +1,11 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function Cart({user, cartItems, setCartItems}) {
     const [total, setTotal] = useState('')
-    const [rerender, setRerender] = useState(false)
+    
+    const navigate = useNavigate()
 
     async function getCart(){
         let bearerToken = localStorage.getItem('token')
@@ -25,6 +27,8 @@ function Cart({user, cartItems, setCartItems}) {
           }
         };
         await axios.delete(`http://localhost:8000/cart/${user.userId}`, config)
+        setCartItems([])
+        navigate('/')
       }
     
       useEffect(() => {
@@ -40,7 +44,7 @@ function Cart({user, cartItems, setCartItems}) {
             <h1 key={i}>{product.name} x {product.quantity}</h1>
             )}
             <h1>Total: {total}</h1>
-            <button onClick={() => {deleteCart()}}>delete entire cart</button>
+            <button onClick={() => {deleteCart()}}>CHECKOUT</button>
         </main>
         
     )

@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Nav from './components/Nav';
 import SignUp from './pages/SignUp';
 import Cart from './pages/Cart'
+import FourOhFour from './components/FourOhFour'
 
 
 function App() {
@@ -35,8 +36,9 @@ function App() {
   return (
     <main>
       <h1>{user.username}</h1>
-      <Nav cartItems={cartItems} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <Nav setUser={setUser} cartItems={cartItems} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
+        <Route path="*" element={<FourOhFour />}></Route>
         <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} user={user}/>}></Route>
         <Route path="/signup" element={<SignUp setIsLoggedIn={setIsLoggedIn}/>}></Route>
         <Route path="/" element={<Home user={user} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>}></Route>

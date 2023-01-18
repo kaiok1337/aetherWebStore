@@ -9,7 +9,8 @@ export default function SignUp({setIsLoggedIn, isLoggedIn}) {
     const [formState, setFormState] = useState({
         username: '',
         password: '',
-        email: ''
+        email: '',
+        roles: 'user'
     })
 
     // update the input value as a user types
@@ -19,17 +20,18 @@ export default function SignUp({setIsLoggedIn, isLoggedIn}) {
 
     async function submitHandler(event) {
         event.preventDefault()
-        const { data } = await axios.post('http://localhost:8000/auth/register', formState)
-        localStorage.token = data.token
+        console.log(formState)
+        await axios.post('http://localhost:8000/auth/register', formState)
+        setIsLoggedIn(true)
     }
 
     const navigate = useNavigate()
     
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/Profile')
+            navigate('/')
         }
-    }, [isLoggedIn])
+    }, [])
 
     return (
         <div className="containers">

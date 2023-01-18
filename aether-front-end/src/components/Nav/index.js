@@ -1,12 +1,17 @@
 import './nav.css'
 import LogIn from '../LogIn'
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
-function Nav({isLoggedIn, setIsLoggedIn, cartItems}) {
+function Nav({setUser, isLoggedIn, setIsLoggedIn, cartItems}) {
+    const [rerender, setRerender] = useState(false)
+
     function logout() {
         localStorage.removeItem('token')
+        setUser({})
         setIsLoggedIn(false)
     }
+
     return(
         <main>
             <img className="logo" src='/images/logo.png'></img>
