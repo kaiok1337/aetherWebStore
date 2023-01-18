@@ -41,17 +41,19 @@ function Product() {
 
     console.log(info)
     return(
-        <section className="card-container">
+        <main>
+          <div className='line'></div>
+          <section className="card-container">
+          
             { info.map((product, i) =>
-            <div key={i} className="product-card">
-                <h2>{product.name}</h2>
-                <p>${product.price}</p>
-                <img src={product.imgUrl}/>
-                <br/>
-                <button onClick={() => {addToCart(product)}}><h2>add to cart</h2></button>
+            <div key={i} className="product-card" onClick={() => {addToCart(product)}}>
+              <h2>{product.name}</h2>
+              <p>${product.price}</p>
+              <img src={product.imgUrl}/>
             </div>
             )}
-        </section>
+          </section>
+        </main>
     )
 }
 

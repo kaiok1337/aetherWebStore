@@ -40,7 +40,7 @@ export default function LogIn ({setIsLoggedIn , isLoggedIn}) {
     // redirect to home page if not logged in
     return (
         <div className="container">
-            <h2 onClick={openModal}>Login</h2>
+            <h1 className="nav-btn" onClick={openModal}>L O G I N</h1>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}

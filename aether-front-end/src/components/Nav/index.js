@@ -13,19 +13,18 @@ function Nav({setUser, isLoggedIn, setIsLoggedIn, cartItems}) {
     }
 
     return(
-        <main>
+        <main className='nav-main'>
             <img className="logo" src='/images/logo.png'></img>
             <nav>
-                <Link to="/" ><h1>HOME</h1></Link>
+                <Link className='nav-btn' to="/" >H O M E</Link>
                 { !isLoggedIn ?
-                <div>
-                    <Link to="/signup"><h1>Sign Up</h1></Link>
+                <div className='nav-div'>
                     <LogIn isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
                 </div>
                 :
-                <div>
-                    <Link to="/cart">{cartItems.length}CART</Link>
-                    <button className="logout" onClick={() => logout()}>LOG OUT</button>
+                <div className='nav-div'>
+                    <Link className='nav-btn' to="/cart">C A R T</Link>
+                    <a className="logout nav-btn" onClick={() => logout()}>L O G  O U T</a>
                 </div>
                 }        
             </nav>

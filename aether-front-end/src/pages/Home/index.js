@@ -10,7 +10,7 @@ function Home({setIsLoggedIn, isLoggedIn, user}) {
     return(
     <div className="App">
       <Product/>
-      <Spotify width="50%" height="500px" link="https://open.spotify.com/artist/7Jtn7Qm47bezv1myVrZIZo?si=DOnmq_uIQ2CrgXuahmPncg" />
+      <Spotify width="50%"  link="https://open.spotify.com/artist/7Jtn7Qm47bezv1myVrZIZo?si=DOnmq_uIQ2CrgXuahmPncg" />
     </div>
     )
 }

@@ -35,7 +35,6 @@ function App() {
 
   return (
     <main>
-      <h1>{user.username}</h1>
       <Nav setUser={setUser} cartItems={cartItems} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route path="*" element={<FourOhFour />}></Route>

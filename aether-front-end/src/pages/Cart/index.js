@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import './cart.css'
 
 function Cart({user, cartItems, setCartItems}) {
     const [total, setTotal] = useState('')
@@ -38,9 +39,10 @@ function Cart({user, cartItems, setCartItems}) {
 
       console.log(cartItems)
     return(
-        <main>
+        <main className='cart'>
             <h1>CART</h1>
             { cartItems.map((product, i) =>
+            
             <h1 key={i}>{product.name} x {product.quantity}</h1>
             )}
             <h1>Total: {total}</h1>
