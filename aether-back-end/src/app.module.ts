@@ -8,7 +8,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/'),
+  imports: [MongooseModule.forRoot(process.env.MONGODB_URI),
   ProductsModule,
   CartModule,
   UserModule,
